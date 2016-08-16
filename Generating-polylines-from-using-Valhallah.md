@@ -37,7 +37,7 @@ It's possible that your `LD_LIBRARY_PATH` is not set correctly and `echo $LD_LIB
 In this case you can run:
 
 ```
-LD_LIBRARY_PATH=.:`cat /etc/ld.so.conf.d/* | grep -v -E "#" | tr "\\n" ":" | sed -e "s/:$//g"`
+export LD_LIBRARY_PATH=.:`cat /etc/ld.so.conf.d/* | grep -v -E "#" | tr "\\n" ":" | sed -e "s/:$//g"`
 ```
 
 ### Confirm
@@ -88,3 +88,24 @@ valhalla_export_edges is a simple command line test tool which dumps information
   -r [ --row ] arg      What separator to use between row [default=\n].
   --config arg          Valhalla configuration file
 ```
+
+An extract can be produced with a command such as this, make sure you redirect the `stdout` stream somewhere.
+
+```
+$ valhalla_export_edges --config conf/valhalla.json > my_extract.polyline
+2016/08/16 09:27:15.865953 [INFO] Enumerating edges...
+...
+```
+
+### Gotchas
+
+If you have an error regarding missing shared object files, you will need to set your `LD_LIBRARY_PATH` env var, see above.
+
+```
+$ valhalla_export_edges --config conf/valhalla.json
+valhalla_export_edges: error while loading shared libraries: libvalhalla_baldr.so.0: cannot open shared object file: No such file or directory
+```
+
+### How long does it take?
+
+It's fast!, it takes about 7 minutes to cut the whole planet, much less for fewer tiles.
