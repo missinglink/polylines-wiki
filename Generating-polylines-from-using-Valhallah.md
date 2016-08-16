@@ -57,3 +57,34 @@ valhalla_build_speeds              valhalla_odin_worker            
 valhalla_build_statistics          valhalla_query_transit             validlocale
 valhalla_build_tiles               valhalla_route_service 
 ```
+
+## Generating tiles
+
+Tiles can be pre-generated and hosted or cut on demand. If you already have tiles you can skip this section.
+
+The install script above includes a script which generated tiles for `switzerland` and `liechtenstein`:
+
+```
+LD_LIBRARY_PATH=/usr/lib:/usr/local/lib valhalla_build_tiles -c conf/valhalla.json switzerland-latest.osm.pbf liechtenstein-latest.osm.pbf
+```
+
+Note that the script references the config file `conf/valhalla.json` which can be customized to change the locations of directories on disk. A [default config](https://github.com/valhalla/conf) is used if a custom config is not provided.
+
+## Cutting polyline extracts
+
+Once you have created/downloaded tiles for valhalla you can use the `valhalla_export_edges` script to export the road graph in polyline format.
+
+```
+$ valhalla_export_edges --help
+
+ Usage: valhalla_export_edges [options]
+
+valhalla_export_edges is a simple command line test tool which dumps information about each graph edge. 
+
+:
+  -h [ --help ]         Print this help message.
+  -v [ --version ]      Print the version of this software.
+  -c [ --column ] arg   What separator to use between columns [default=\0].
+  -r [ --row ] arg      What separator to use between row [default=\n].
+  --config arg          Valhalla configuration file
+```
