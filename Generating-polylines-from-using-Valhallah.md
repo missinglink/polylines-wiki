@@ -31,3 +31,11 @@ libboost1.58-doc - Boost.org libraries documentation
 libboost1.58-tools-dev - Boost C++ Libraries development tools
 libboost1.58-all-dev - Boost C++ Libraries development files (ALL)
 ```
+
+It's possible that your `LD_LIBRARY_PATH` is not set correctly and `echo $LD_LIBRARY_PATH` returns nothing.
+
+In this case you can run:
+
+```
+LD_LIBRARY_PATH=.:`cat /etc/ld.so.conf.d/* | grep -v -E "#" | tr "\\n" ":" | sed -e "s/:$//g"`
+```
