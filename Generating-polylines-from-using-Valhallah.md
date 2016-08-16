@@ -13,4 +13,21 @@ If you are rebuilding after updating the software you may need to rebuild all th
 
 The build itself can take some time, sit back and grab a coffee.
 
+### Gotchas
 
+On more recent versions of Ubuntu you might find some of the `apt` versions have changed. eg. if you get a message such as:
+
+```
+E: Unable to locate package libboost1.54-all-dev
+```
+
+You can substitute it for a newer version such as: `libboost1.58-all-dev`.
+
+```
+$ apt-cache search libboost1
+libboost1.58-dbg - Boost C++ Libraries with debug symbols
+libboost1.58-dev - Boost C++ Libraries development files
+libboost1.58-doc - Boost.org libraries documentation
+libboost1.58-tools-dev - Boost C++ Libraries development tools
+libboost1.58-all-dev - Boost C++ Libraries development files (ALL)
+```
