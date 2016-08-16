@@ -60,6 +60,17 @@ valhalla_build_statistics          valhalla_query_transit            
 valhalla_build_tiles               valhalla_route_service 
 ```
 
+## Configuration
+
+Most valhallah scripts reference the config file `conf/valhalla.json` which can be customized to change the locations of directories on disk. A [default config](https://github.com/valhalla/conf) is used if a custom config is not provided.
+
+If you are downloading pre-generated tiles then you will need to extract them in to your `tile_dir`.
+
+```
+peter: .../www/valhalla$ grep tile_dir conf/valhalla.json
+    "tile_dir": "/data/valhalla",
+```
+
 ## Generating tiles
 
 Tiles can be pre-generated and hosted or cut on demand. If you already have tiles you can skip this section.
@@ -69,8 +80,6 @@ The install script above includes a script which generated tiles for `switzerlan
 ```
 LD_LIBRARY_PATH=/usr/lib:/usr/local/lib valhalla_build_tiles -c conf/valhalla.json switzerland-latest.osm.pbf liechtenstein-latest.osm.pbf
 ```
-
-Note that the script references the config file `conf/valhalla.json` which can be customized to change the locations of directories on disk. A [default config](https://github.com/valhalla/conf) is used if a custom config is not provided.
 
 ## Cutting polyline extracts
 
