@@ -35,13 +35,11 @@ valhalla_build_tiles               valhalla_route_service
 
 ## Configuration
 
-Most valhalla scripts reference the config file `conf/valhalla.json` which can be customized to change the locations of directories on disk. A [default config](https://github.com/valhalla/conf) is used if a custom config is not provided.
+Build a config file according to the [documentation](https://github.com/valhalla/valhalla#running):
 
-If you are downloading pre-generated tiles then you will need to extract them in to your `tile_dir`.
-
-```
-peter: .../www/valhalla$ grep tile_dir conf/valhalla.json
-    "tile_dir": "/data/valhalla",
+```sh
+mkdir -p valhalla_tiles
+valhalla_build_config --mjolnir-tile-dir ${PWD}/valhalla_tiles --mjolnir-tile-extract ${PWD}/valhalla_tiles.tar --mjolnir-timezone ${PWD}/valhalla_tiles/timezones.sqlite --mjolnir-admin ${PWD}/valhalla_tiles/admins.sqlite > valhalla.json
 ```
 
 ## Generating tiles
@@ -51,7 +49,7 @@ Tiles can be pre-generated and hosted or cut on demand. If you already have tile
 The install script above includes a script which generated tiles for `switzerland` and `liechtenstein`:
 
 ```
-LD_LIBRARY_PATH=/usr/lib:/usr/local/lib valhalla_build_tiles -c conf/valhalla.json switzerland-latest.osm.pbf liechtenstein-latest.osm.pbf
+LD_LIBRARY_PATH=/usr/lib:/usr/local/lib valhalla_build_tiles -c valhalla.json switzerland-latest.osm.pbf liechtenstein-latest.osm.pbf
 ```
 
 ## Cutting polyline extracts
@@ -76,7 +74,7 @@ valhalla_export_edges is a simple command line test tool which dumps information
 An extract can be produced with a command such as this, make sure you redirect the `stdout` stream somewhere.
 
 ```
-$ valhalla_export_edges --config conf/valhalla.json > my_extract.polyline
+$ valhalla_export_edges --config valhalla.json > my_extract.polyline
 2016/08/16 09:27:15.865953 [INFO] Enumerating edges...
 ...
 ```
@@ -86,7 +84,7 @@ $ valhalla_export_edges --config conf/valhalla.json > my_extract.polyline
 If you have an error regarding missing shared object files, you will need to set your `LD_LIBRARY_PATH` env var, see above.
 
 ```
-$ valhalla_export_edges --config conf/valhalla.json
+$ valhalla_export_edges --config valhalla.json
 valhalla_export_edges: error while loading shared libraries: libvalhalla_baldr.so.0: cannot open shared object file: No such file or directory
 ```
 
