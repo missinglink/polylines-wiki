@@ -1,6 +1,6 @@
 Mapzen created an opensource routing engine called [Valhalla](https://github.com/valhalla).
 
-An [export script](https://github.com/valhalla/tools/pull/68) was added to the valhalla tools repo which enables exporting the routing graph as polylines.
+An [export script](https://github.com/valhalla/valhalla/blob/master/src/valhalla_export_edges.cc) was added to the valhalla tools repo which enables exporting the routing graph as polylines.
 
 The polylines can then be imported using the scripts in this repo.
 
