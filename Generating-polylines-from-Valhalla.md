@@ -30,6 +30,14 @@ and to check if they are useable:
 valhalla_build_tiles --help
 ```
 
+### Gotchas
+
+If you have an error regarding missing shared object files, you will need to run the following command as root or with sudo priviliges:
+
+```sh
+ldconfig
+```
+
 ## Configuration
 
 Build a config file according to the [documentation](https://github.com/valhalla/valhalla#running):
@@ -46,7 +54,7 @@ Tiles can be pre-generated and hosted or cut on demand. If you already have tile
 The install script above includes a script which generated tiles for `switzerland` and `liechtenstein`:
 
 ```
-LD_LIBRARY_PATH=/usr/lib:/usr/local/lib valhalla_build_tiles -c valhalla.json switzerland-latest.osm.pbf liechtenstein-latest.osm.pbf
+valhalla_build_tiles -c valhalla.json switzerland-latest.osm.pbf liechtenstein-latest.osm.pbf
 ```
 
 ## Cutting polyline extracts
@@ -74,15 +82,6 @@ An extract can be produced with a command such as this, make sure you redirect t
 $ valhalla_export_edges --config valhalla.json > my_extract.polyline
 2016/08/16 09:27:15.865953 [INFO] Enumerating edges...
 ...
-```
-
-### Gotchas
-
-If you have an error regarding missing shared object files, you will need to set your `LD_LIBRARY_PATH` env var, see above.
-
-```
-$ valhalla_export_edges --config valhalla.json
-valhalla_export_edges: error while loading shared libraries: libvalhalla_baldr.so.0: cannot open shared object file: No such file or directory
 ```
 
 ### How long does it take?
