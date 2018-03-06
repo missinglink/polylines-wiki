@@ -19,18 +19,15 @@ The build itself can take some time, sit back and grab a coffee.
 
 Once the tools are installed you should be able to find them on your `PATH`:
 
+```sh
+which valhalla_export_edges
+# this should return the following: /usr/local/bin/valhalla_export_edges
 ```
-peter: .../pelias/polylines (master)$ val
-valhalla_benchmark_adjacency_list  valhalla_build_timezones           valhalla_run_isochrone
-valhalla_benchmark_admins          valhalla_build_transit             valhalla_run_map_match
-valhalla_benchmark_loki            valhalla_elevation_service         valhalla_run_matrix
-valhalla_benchmark_skadi           valhalla_export_edges              valhalla_run_route
-valhalla_build_admins              valhalla_loki_worker               valhalla_skadi_worker
-valhalla_build_connectivity        valhalla_map_match_service         valhalla_thor_worker
-valhalla_build_elevation           valhalla_meili_worker              valhalla_tyr_worker
-valhalla_build_speeds              valhalla_odin_worker               valhalla_ways_to_edges
-valhalla_build_statistics          valhalla_query_transit             validlocale
-valhalla_build_tiles               valhalla_route_service 
+
+and to check if they are useable:
+
+```sh
+valhalla_build_tiles --help
 ```
 
 ## Configuration
